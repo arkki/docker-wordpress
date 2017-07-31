@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+
+  wordpress:
+    image: wordpress
+    environment:
+      - WORDPRESS_DB_PASSWORD
+      - TZ
+    volumes:
+      - ./docker-data/www:/var/www/html
+
+  mysql:
+    image: mariadb:10.3.0
+    environment:
+      - MYSQL_ROOT_PASSWORD
+      - TZ
+    volumes:
+      - ./docker-data/data:/var/lib/mysql
+
+  nginx:
+    build:
+        context: .
+        dockerfile:  nginx/Dockerfile
+    image: wp-nginx
+    ports:
+      - 80:80
+    environment:
+      - TZ
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+    # tty: true
