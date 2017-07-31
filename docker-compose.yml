@@ -3,7 +3,7 @@ version: '2'
 services:
 
   wordpress:
-    image: wordpress
+    image: wordpress:4.8.0-apache
     environment:
       - WORDPRESS_DB_PASSWORD
       - TZ
